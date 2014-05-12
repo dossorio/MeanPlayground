@@ -1,0 +1,36 @@
+html {
+  background-color: white;
+  padding: 0 100px;
+  overflow: hidden; }
+
+body {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  min-height: 500px;
+  margin: 20px auto;
+  padding: 50px;
+  border: 1px solid grey; }
+
+.tanks {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  float: left;
+  min-height: inherit;
+  min-width: 75%;
+  background-color: grey;
+  border: 1px solid red; }
+
+.chat {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  float: right;
+  min-height: inherit;
+  width: 23%;
+  border: 1px solid red;
+  padding: 5px; }
+  .chat > input[type=text] {
+    padding: 5px;
+    border-style: solid;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    width: 94%; }

@@ -1,0 +1,47 @@
+$border-radius: 5px;
+$regular-padding: 5px;
+
+@mixin border-radius {
+  -webkit-border-radius: $border-radius $border-radius $border-radius $border-radius;
+  border-radius: $border-radius $border-radius $border-radius $border-radius;
+}
+
+html {
+  background-color: white;
+  padding: 0 100px;
+  overflow: hidden;
+}
+
+body {
+  @include border-radius;
+  min-height: 500px;
+  margin: 20px auto;
+  padding: 50px;
+  border: 1px solid grey;
+}
+
+.tanks {
+  @include border-radius;
+  float: left;
+  min-height: inherit;
+  min-width: 75%;
+  background-color: grey;
+  border: 1px solid red;
+}
+
+.chat {
+
+  @include border-radius;
+  float: right;
+  min-height: inherit;
+  width: 23%;
+  border: 1px solid red;
+  padding: $regular-padding;
+
+  > input[type=text] {
+    padding: $regular-padding;
+    border-style: solid;
+    @include border-radius;
+    width: 94%;
+  }
+}

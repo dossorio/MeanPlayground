@@ -1,8 +1,21 @@
 {
-    "name": "MeanPlayground",
-    "main": "server.js",
-    "dependencies":{
-        "express":  "~3.5",
-        "mongoose": "~3.6"
+    "name": "tanks",
+    "version": "0.0.0",
+    "description": "A tanks game, playing with MEAN stack",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "tanks",
+        "game"
+    ],
+    "author": "dossorio",
+    "license": "ISC",
+    "dependencies": {
+        "express": "~3.0",
+        "swig": "~1.3.2",
+        "socket.io": "~0.9.0",
+        "mongoose": "~3.0"
     }
 }
