@@ -1,30 +1,63 @@
 /**
  * Created by dossorio on 28/04/2014.
  */
-var express = require('express'),
-    app = express(),
+var express = require('express');
+var app = express(),
     server = require('http').createServer(app),
-    swig = require('swig'),
-    io = require('socket.io').listen(server);
+    io = require('socket.io').listen(server),
+    mongoose = require('mongoose');
 
-server.listen(8888);
+//Schema & DB access
+mongoose.connect('mongodb://localhost/tanks');
 
-function home(req, res) {
-    res.render('index');
-}
+var tankSchema = mongoose.Schema({
+    name: String,
+    colour: String,
+    pos: { x: Number, y: Number }
+});
 
-app.engine('html', swig.renderFile);
+var tank = mongoose.model('Tank', tankSchema);
 
-app.set('view engine', 'html');
-app.set('view cache', false);
-app.use(express.static(__dirname + "/public"));
+//App config
+app.configure(function () {
+    app.use(express.static(__dirname + '/public'));
+    app.use(express.logger('dev'));
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+});
 
-swig.setDefaults({cache: false});
-
+//Sockets config
 io.sockets.on('connection', function (socket) {
     socket.on('msg sent', function (data) {
         socket.broadcast.emit('msg broadcast', data);
     });
 });
 
-app.get('/', home);
+server.listen(8888);
+console.log('Listening at 8888, try http://localhost:8888');
+
+//routes
+app.get('/tanks', function (req, res) {
+
+    tank.find(function (err, tanks){
+
+        if (err) res.send(err);
+
+        res.json(tanks);
+    });
+});
+
+app.post('/tanks', function (req, res){
+
+    tank.create({
+        name: req.body.name
+    }, function (err, tank){
+
+        if (err) res.send(err);
+
+        tank.find(function (err, tanks){
+            if (err) res.send(err);
+            res.json(tanks);
+        });
+    });
+});
