@@ -16,7 +16,7 @@ var tankSchema = mongoose.Schema({
     pos: { x: Number, y: Number }
 });
 
-var tank = mongoose.model('Tank', tankSchema);
+var Tank = mongoose.model('Tank', tankSchema);
 
 //App config
 app.configure(function () {
@@ -39,7 +39,7 @@ console.log('Listening at 8888, try http://localhost:8888');
 //routes
 app.get('/tanks', function (req, res) {
 
-    tank.find(function (err, tanks){
+    Tank.find(function (err, tanks){
 
         if (err) res.send(err);
 
@@ -49,15 +49,23 @@ app.get('/tanks', function (req, res) {
 
 app.post('/tanks', function (req, res){
 
-    tank.create({
+    Tank.create({
         name: req.body.name
     }, function (err, tank){
 
         if (err) res.send(err);
 
-        tank.find(function (err, tanks){
+        Tank.find(function (err, tanks){
             if (err) res.send(err);
             res.json(tanks);
         });
+    });
+});
+
+app.delete('/tanks/disconnect', function (req, res){
+    Tank.remove({name: req.body.name}, function (err, tank){
+        if (err) res.send(err);
+
+        res.send('Bye!');
     });
 });
