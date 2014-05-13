@@ -6,7 +6,7 @@ var express     = require('express');
 var app         = express();
 var mongoose    = require('mongoose');
 
-var db = require('./config/db');
+var db = require('./config/config');
 
 var port = process.env.PORT || 8080;
 mongoose.connect(db.url);
@@ -18,7 +18,7 @@ app.configure(function(){
     app.use(express.methodOverride());
 });
 
-require('./app/routes')(app);
+require('./app/routes/tank')(app);
 
 app.listen(port);
 console.log('Server listening on port: ' + port);

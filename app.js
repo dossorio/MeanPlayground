@@ -2,29 +2,26 @@
  * Created by dossorio on 28/04/2014.
  */
 var express = require('express');
-var app = express(),
-    server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
-    mongoose = require('mongoose');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+var mongoose = require('mongoose');
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var config = require('./config/config');
+
+console.log(config);
 
 //Schema & DB access
-mongoose.connect('mongodb://localhost/tanks');
-
-var tankSchema = mongoose.Schema({
-    name: String,
-    colour: String,
-    pos: { x: Number, y: Number }
-});
-
-var Tank = mongoose.model('Tank', tankSchema);
+mongoose.connect(config.db.url);
+var Tank = require(config.path.models + 'tank');
 
 //App config
-app.configure(function () {
-    app.use(express.static(__dirname + '/public'));
-    app.use(express.logger('dev'));
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-});
+app.use(express.static(__dirname + '/public'));
+app.use(logger('dev'));
+app.use(bodyParser());
+app.use(methodOverride());
 
 //Sockets config
 io.sockets.on('connection', function (socket) {
@@ -33,39 +30,10 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-server.listen(8888);
-console.log('Listening at 8888, try http://localhost:8888');
 
 //routes
-app.get('/tanks', function (req, res) {
+var tankRoutes = require(config.path.routes + 'tank')(express.Router());
+app.use('/tanks', tankRoutes);
 
-    Tank.find(function (err, tanks){
-
-        if (err) res.send(err);
-
-        res.json(tanks);
-    });
-});
-
-app.post('/tanks', function (req, res){
-
-    Tank.create({
-        name: req.body.name
-    }, function (err, tank){
-
-        if (err) res.send(err);
-
-        Tank.find(function (err, tanks){
-            if (err) res.send(err);
-            res.json(tanks);
-        });
-    });
-});
-
-app.delete('/tanks/disconnect', function (req, res){
-    Tank.remove({name: req.body.name}, function (err, tank){
-        if (err) res.send(err);
-
-        res.send('Bye!');
-    });
-});
+server.listen(config.port);
+console.log('Listening at ' + config.port + ', try http://localhost:' + config.port);

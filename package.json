@@ -1,20 +1,23 @@
 {
-    "name": "tanks",
-    "version": "0.0.0",
-    "description": "A tanks game, playing with MEAN stack",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "tanks",
-        "game"
-    ],
-    "author": "dossorio",
-    "license": "ISC",
-    "dependencies": {
-        "express": "~3.0",
-        "socket.io": "~0.9.0",
-        "mongoose": "~3.0"
-    }
+  "name": "tanks",
+  "version": "0.0.0",
+  "description": "A tanks game, playing with MEAN stack",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tanks",
+    "game"
+  ],
+  "author": "dossorio",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.0",
+    "morgan": "~1.0.1",
+    "body-parser": "~1.2.0",
+    "socket.io": "~0.9.0",
+    "mongoose": "~3.0",
+    "method-override": "~1.0.0"
+  }
 }
