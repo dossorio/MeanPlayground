@@ -11,8 +11,6 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var config = require('./config/config');
 
-console.log(config);
-
 //Schema & DB access
 mongoose.connect(config.db.url);
 var Tank = require(config.path.models + 'tank');

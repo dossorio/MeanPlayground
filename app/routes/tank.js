@@ -3,7 +3,8 @@
  */
 
 var tankRoutes = function (router) {
-    router.get('/tanks', function (req, res) {
+
+    router.get('', function (req, res) {
 
         Tank.find(function (err, tanks) {
 
@@ -12,7 +13,7 @@ var tankRoutes = function (router) {
             res.json(tanks);
         });
     })
-    .post('/tanks', function (req, res) {
+    .post('', function (req, res) {
 
         Tank.create({
             name: req.body.name
@@ -26,13 +27,15 @@ var tankRoutes = function (router) {
             });
         });
     })
-    .delete('/tanks/disconnect', function (req, res) {
+    .delete('/disconnect', function (req, res) {
         Tank.remove({name: req.body.name}, function (err, tank) {
             if (err) res.send(err);
 
             res.send('Bye!');
         });
     });
+
+    return router;
 }
 
 module.exports = tankRoutes;
