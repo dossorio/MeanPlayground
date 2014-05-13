@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"/>
-  <title>Tanks</title>
-  <link type="text/css" href="/css/style.css" rel="stylesheet">
-  <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-  <script src="/js/chat.js"></script>
-  <script src="/js/tanks.js"></script>
-</head>
-<body>
-  <div class="tanks"></div>
-  <div class="chat"></div>
-</body>
+<html ng-app="tanksApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tanks</title>
+    <link type="text/css" href="/css/style.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/chat.js"></script>
+    <script src="/js/tanks.js"></script>
+  </head>
+  <body ng-controller="mainController">
+    <div class="tanks"></div>
+    <div class="chat"></div>
+  </body>
 </html>

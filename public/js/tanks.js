@@ -14,18 +14,16 @@ $.fn.tanks = function () {
 
     $(pg).appendTo(this);
 
-    function dsgfg() {
-        var pos = {
-            x: 200,
-            y: 200,
-            move: function (x, y) {
-                this.y = y;
-                console.log('Pos: ' + this.x + ' - ' + x + ', ' + this.y + ' - ' + y);
-            }
-        };
-    }
+    var pos = {
+        x: 200,
+        y: 200,
+        move: function (x, y) {
+            this.y = y;
+            console.log('Pos: ' + this.x + ' - ' + x + ', ' + this.y + ' - ' + y);
+        }
+    };
 
-    pgCxt.fillRect(pos.x, pos.y, 25, 25);
+    pgCxt.fillRect(200, 200, 25, 25);
 
     /* keys 37, 38, 39 and 40 */
     $(document).keydown(function(e){
