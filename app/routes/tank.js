@@ -2,7 +2,7 @@
  * Created by dossorio on 12/05/2014.
  */
 
-var tankRoutes = function (router) {
+var tankRoutes = function (router, Tank) {
 
     router.get('', function (req, res) {
 
@@ -31,7 +31,7 @@ var tankRoutes = function (router) {
         Tank.remove({name: req.body.name}, function (err, tank) {
             if (err) res.send(err);
 
-            res.send('Bye!');
+            res.send('Bye' + req.body.name + '!');
         });
     });
 

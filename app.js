@@ -28,10 +28,13 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-
 //routes
-var tankRoutes = require(config.path.routes + 'tank')(express.Router());
+var tankRoutes = require(config.path.routes + 'tank')(express.Router(), Tank);
 app.use('/tanks', tankRoutes);
+
+app.use('*', function (req, res){
+    res.sendfile('./public/index.html');
+});
 
 server.listen(config.port);
 console.log('Listening at ' + config.port + ', try http://localhost:' + config.port);
